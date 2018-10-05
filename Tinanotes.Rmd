@@ -480,3 +480,24 @@ complete <- function(directory,  id = 1:332) {
 
 
 ```
+
+
+## Read all csv in a folder
+```{Read all csv in a folder}
+path =  "./03 Media/Portfolio/Inputs"
+a = list.files(path, pattern="\\.csv$")
+
+temp = list()
+for (i in 1:length(a)){
+  temp[[i]] = read.csv(file.path(path, a[[i]]), stringsAsFactors = F) %>%
+    mutate(source = a[[i]])
+}
+portfolio = do.call(rbind, temp)
+rm(temp)
+```
+
+
+## Create directory if it doesnt exist yet
+```{Create directory if it doesnt exist yet}
+if(!file.exists("data")){dir.create("data")}
+```
